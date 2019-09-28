@@ -18,6 +18,7 @@ namespace SimpleMahjong
         {
             AddWindTile();
             AddDragonTile();
+            AddNumberTile();
         }
 
         private void AddWindTile()
@@ -79,6 +80,26 @@ namespace SimpleMahjong
                     MahjongSet.Add(NumberTile);
                 }
             }
+        }
+
+        private void ShuffleSet()
+        {
+            Random rnd = new Random();
+            var result = MahjongSet.OrderBy(item => rnd.Next());
+            MahjongSet = result.ToList();
+        }
+
+        private Tile DrawTile()
+        {
+            Tile Draw = MahjongSet[MahjongSet.Count-1];
+            MahjongSet.RemoveAt(MahjongSet.Count - 1);
+
+            return Draw;
+        }
+
+        private int GetTilesCount()
+        {
+            return MahjongSet.Count;
         }
     }
 }
