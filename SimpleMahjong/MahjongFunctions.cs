@@ -18,9 +18,10 @@ namespace SimpleMahjong
             int result = 0;
             ShantenNum = 8;
 
-            List<opentile> tiles = new List<opentile>(37);
+            List<opentile> tiles = new List<opentile>(39);
+            tiles.AddRange(Enumerable.Repeat(new opentile(), 39));
             
-            for(int i = 0; i < hand.Count; i++)
+            for(int i = 0; i < hand.Count-1; i++)
             {
                 tiles[hand[i].Number].total++;
                 if (hand[i].Closed)
@@ -48,7 +49,7 @@ namespace SimpleMahjong
         {
             int tempShanten = shantenNum;
 
-            for(int i = 0; i < tiles.Count; i++)
+            for(int i = 0; i < tiles.Count-1; i++)
             {
                 //check pons and pairs
                 if (tiles[i].total >= 3)

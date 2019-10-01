@@ -10,6 +10,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
+        <asp:HiddenField ID="ShanNum" runat="server" />
+        <asp:HiddenField ID="handsize" runat="server" />
         <div>
             <asp:ImageButton ID="btnBamboo1" runat="server" ImageUrl="~/TileAssets/bamboo/bamboo1.png" Class="tile" OnClick="btnBamboo1_Click"/>
             <asp:ImageButton ID="btnBamboo2" runat="server" ImageUrl="~/TileAssets/bamboo/bamboo2.png" Class="tile" OnClick="btnBamboo2_Click"/>
@@ -52,7 +54,10 @@
         <br />
         <br />
         <div>
-            <asp:Label ID="Label1" runat="server" Text="Hand"></asp:Label>
+            <asp:Button ID="btnClearHand" runat="server" Text="Clear Hand" OnClick="btnClearHand_Click" />
+            <br />
+            <asp:Label ID="Label1" runat="server" Text="Hand Size: "></asp:Label> <%=handsize.Value %>
+            <asp:Label ID="Label2" runat="server" Text="Shanten Number: "></asp:Label> <%=ShanNum.Value %>
             <div id="handID" runat="server">
                 
             </div>

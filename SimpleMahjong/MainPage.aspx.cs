@@ -26,6 +26,8 @@ namespace SimpleMahjong
             }
             else
             {
+                ShanNum.Value = "";
+                handsize.Value = "0";
                 Session.Clear();
             }
 
@@ -54,7 +56,7 @@ namespace SimpleMahjong
         {
             if (hand.Count > 0)
             {
-                hand.OrderBy(x => x.Number);
+                hand = hand.OrderBy(x => x.Number).ToList();
             }
         }
 
@@ -64,11 +66,22 @@ namespace SimpleMahjong
             {
                 hand = (List<Tile>)Session["hand"];
             }
-            Tile tile = new Tile();
-            tile.Number = num;
-            hand.Add(tile);
-            Session["hand"] = hand;
+
+            if(hand.Count() != 14)
+            {
+                Tile tile = new Tile();
+                tile.Number = num;
+                hand.Add(tile);
+                Session["hand"] = hand;
+            }
+
+            if (hand.Count() == 14)
+            {
+                ShanNum.Value = MahjongFunctions.Shanten(hand).ToString();
+            }
+
             ShowHand();
+            handsize.Value = hand.Count().ToString();
         }
 
         protected void btnBamboo1_Click(object sender, ImageClickEventArgs e)
@@ -239,6 +252,12 @@ namespace SimpleMahjong
         protected void Green_Click(object sender, ImageClickEventArgs e)
         {
             InsertToHand(38);
+        }
+
+        protected void btnClearHand_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

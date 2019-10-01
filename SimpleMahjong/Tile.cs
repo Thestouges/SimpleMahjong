@@ -45,6 +45,7 @@ namespace SimpleMahjong
      * 36   Red Dragon
      * 37   White Dragon
      * 38   Green Dragon
+     * 39
      */
 
     public enum Suit
