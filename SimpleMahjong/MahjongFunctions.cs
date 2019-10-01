@@ -71,6 +71,9 @@ namespace SimpleMahjong
                 if (i >= 30)
                     continue;
 
+                if (i % 10 == 9)
+                    continue;
+
                 //check sequences
                 if (tiles[i].total >= 1)
                 {
