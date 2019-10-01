@@ -22,7 +22,7 @@ namespace SimpleMahjong
             hand = new List<Tile>();
             if (Page.IsPostBack)
             {
-                
+
             }
             else
             {
@@ -67,7 +67,21 @@ namespace SimpleMahjong
                 hand = (List<Tile>)Session["hand"];
             }
 
-            if(hand.Count() != 14)
+            int insertCounter = 0;
+            foreach(Tile item in hand)
+            {
+                if(item.Number == num)
+                {
+                    insertCounter++;
+                }
+
+                if(insertCounter >= 4)
+                {
+                    return;
+                }
+            }
+
+            if (hand.Count() != 14)
             {
                 Tile tile = new Tile();
                 tile.Number = num;
@@ -75,13 +89,18 @@ namespace SimpleMahjong
                 Session["hand"] = hand;
             }
 
-            if (hand.Count() == 14)
-            {
-                ShanNum.Value = MahjongFunctions.Shanten(hand).ToString();
-            }
-
             ShowHand();
             handsize.Value = hand.Count().ToString();
+
+            if (hand.Count() == 14)
+            {
+                ShowShantenNumber();
+            }
+        }
+
+        private void ShowShantenNumber()
+        {
+            ShanNum.Value = MahjongFunctions.Shanten(hand).ToString();
         }
 
         protected void btnBamboo1_Click(object sender, ImageClickEventArgs e)

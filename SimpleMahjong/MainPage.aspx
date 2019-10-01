@@ -6,7 +6,7 @@
 <head runat="server">
     <title></title>
 
-    <link rel="stylesheet" type="text/css" href="~/CSS/Mahjong.css">
+    <link rel="stylesheet" type="text/css" href="~/CSS/Mahjong.css"/>
 </head>
 <body>
     <form id="form1" runat="server">
