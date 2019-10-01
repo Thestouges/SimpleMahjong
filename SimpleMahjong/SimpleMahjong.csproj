@@ -74,6 +74,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\Mahjong.css" />
     <Content Include="MainPage.aspx" />
     <Content Include="TileAssets\bamboo\bamboo1.png" />
     <Content Include="TileAssets\bamboo\bamboo2.png" />
