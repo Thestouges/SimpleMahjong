@@ -75,6 +75,45 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MainPage.aspx" />
+    <Content Include="TileAssets\bamboo\bamboo1.png" />
+    <Content Include="TileAssets\bamboo\bamboo2.png" />
+    <Content Include="TileAssets\bamboo\bamboo3.png" />
+    <Content Include="TileAssets\bamboo\bamboo4.png" />
+    <Content Include="TileAssets\bamboo\bamboo5.png" />
+    <Content Include="TileAssets\bamboo\bamboo6.png" />
+    <Content Include="TileAssets\bamboo\bamboo7.png" />
+    <Content Include="TileAssets\bamboo\bamboo8.png" />
+    <Content Include="TileAssets\bamboo\bamboo9.png" />
+    <Content Include="TileAssets\dragons\dragon-chun.png" />
+    <Content Include="TileAssets\dragons\dragon-green.png" />
+    <Content Include="TileAssets\dragons\dragon-haku.png" />
+    <Content Include="TileAssets\face-down-128px.png" />
+    <Content Include="TileAssets\man\man1.png" />
+    <Content Include="TileAssets\man\man2.png" />
+    <Content Include="TileAssets\man\man3.png" />
+    <Content Include="TileAssets\man\man4.png" />
+    <Content Include="TileAssets\man\man5.png" />
+    <Content Include="TileAssets\man\man6.png" />
+    <Content Include="TileAssets\man\man7.png" />
+    <Content Include="TileAssets\man\man8.png" />
+    <Content Include="TileAssets\man\man9.png" />
+    <Content Include="TileAssets\pin\pin1.png" />
+    <Content Include="TileAssets\pin\pin2.png" />
+    <Content Include="TileAssets\pin\pin3.png" />
+    <Content Include="TileAssets\pin\pin4.png" />
+    <Content Include="TileAssets\pin\pin5.png" />
+    <Content Include="TileAssets\pin\pin6.png" />
+    <Content Include="TileAssets\pin\pin7.png" />
+    <Content Include="TileAssets\pin\pin8.png" />
+    <Content Include="TileAssets\pin\pin9.png" />
+    <Content Include="TileAssets\readme.txt" />
+    <Content Include="TileAssets\red-doras\red-dora-bamboo5.png" />
+    <Content Include="TileAssets\red-doras\red-dora-man5.png" />
+    <Content Include="TileAssets\red-doras\red-dora-pin5.png" />
+    <Content Include="TileAssets\winds\wind-east.png" />
+    <Content Include="TileAssets\winds\wind-north.png" />
+    <Content Include="TileAssets\winds\wind-south.png" />
+    <Content Include="TileAssets\winds\wind-west.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +138,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -29,15 +29,86 @@ namespace SimpleMahjong
                 }
             }
 
+            int index = 0;
             foreach(opentile item in tiles)
             {
                 if(item.total >= 2 && item.closed >=2)
                 {
-
+                    List<opentile> temptiles = tiles;
+                    temptiles[index].total -= 2;
+                    ShantenNumber(temptiles, ref ShantenNum);
                 }
+                index++;
             }
 
             return result;
+        }
+
+        public void ShantenNumber(List<opentile> tiles, ref int shantenNum)
+        {
+            int tempShanten = shantenNum;
+
+            for(int i = 0; i < tiles.Count; i++)
+            {
+                //check pons and pairs
+                if (tiles[i].total >= 3)
+                {
+                    List<opentile> temptiles = tiles;
+                    temptiles[i].total -= 3;
+                    tempShanten -= 2;
+                    ShantenNumber(temptiles, ref tempShanten);
+                    tempShanten = shantenNum;
+                }
+                if (tiles[i].total >= 2)
+                {
+                    List<opentile> temptiles = tiles;
+                    temptiles[i].total -= 3;
+                    tempShanten -= 1;
+                    ShantenNumber(temptiles, ref tempShanten);
+                    tempShanten = shantenNum;
+                }
+
+                if (i >= 30)
+                    continue;
+
+                //check sequences
+                if (tiles[i].total >= 1)
+                {
+                    if(tiles[i+1].total >= 1 && tiles[i+2].total >= 1)
+                    {
+                        List<opentile> temptiles = tiles;
+                        temptiles[i].total -= 1;
+                        temptiles[i+1].total -= 1;
+                        temptiles[i+2].total -= 1;
+                        tempShanten -= 2;
+                        ShantenNumber(temptiles, ref tempShanten);
+                        tempShanten = shantenNum;
+                    }
+                    else if (tiles[i + 1].total >= 1)
+                    {
+                        List<opentile> temptiles = tiles;
+                        temptiles[i].total -= 1;
+                        temptiles[i + 1].total -= 1;
+                        tempShanten -= 1;
+                        ShantenNumber(temptiles, ref tempShanten);
+                        tempShanten = shantenNum;
+                    }
+                    else if (tiles[i + 2].total >= 1)
+                    {
+                        List<opentile> temptiles = tiles;
+                        temptiles[i].total -= 1;
+                        temptiles[i + 2].total -= 1;
+                        tempShanten -= 1;
+                        ShantenNumber(temptiles, ref tempShanten);
+                        tempShanten = shantenNum;
+                    }
+                }
+            }
+
+            if (ShantenNum < tempShanten)
+            {
+                shantenNum = tempShanten;
+            }
         }
 
         public bool InFuriten(List<Tile> hand, List<Tile> discard)

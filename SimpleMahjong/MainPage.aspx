@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
+            <asp:ImageButton ID="ImageButton1" runat="server" />
         </div>
     </form>
 </body>

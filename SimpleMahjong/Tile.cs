@@ -37,13 +37,14 @@ namespace SimpleMahjong
      * 28   8 Character
      * 29   9 Character
      * 30
-     * 31   East Wind
-     * 32   South Wind
-     * 33   West Wind
-     * 34   North Wind
-     * 35   Red Dragon
-     * 36   White Dragon
-     * 37   Green Dragon
+     * 31
+     * 32   East Wind
+     * 33   South Wind
+     * 34   West Wind
+     * 35   North Wind
+     * 36   Red Dragon
+     * 37   White Dragon
+     * 38   Green Dragon
      */
 
     public enum Suit
