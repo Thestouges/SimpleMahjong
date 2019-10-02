@@ -20,8 +20,8 @@ namespace SimpleMahjong
         }
         public int Shanten(List<Tile> hand)
         {
-            int tempShantenNum = 8;
-            int ListNumber = 12;
+            int ListNumber = 39;
+            ShantenNum = 8;
 
             List<opentile> tiles = new List<opentile>();
             for (int i = 0; i < ListNumber; i++)
@@ -43,6 +43,7 @@ namespace SimpleMahjong
             int index = 0;
             foreach(opentile item in tiles)
             {
+                int tempShantenNum = 8;
                 if (item.total >= 2 && item.closed >=2)
                 {
                     List<opentile> temptiles = tiles.Select(x => x.Copy()).ToList();
@@ -52,14 +53,18 @@ namespace SimpleMahjong
                 }
                 if(item.total == 1 && item.closed >= 1)
                 {
-
+                    List<opentile> temptiles = tiles.Select(x => x.Copy()).ToList();
+                    temptiles[index].total -= 1;
+                    tempShantenNum++;
+                    //temptiles[index].closed -= 2;
+                    ShantenNumber(temptiles, ref tempShantenNum, 1);
                 }
                 index++;
-            }
-            
-            if(ShantenNum > tempShantenNum)
-            {
-                ShantenNum = tempShantenNum;
+
+                if (ShantenNum > tempShantenNum)
+                {
+                    ShantenNum = tempShantenNum;
+                }
             }
 
             return ShantenNum;
@@ -95,9 +100,6 @@ namespace SimpleMahjong
 
                 if (i % 10 == 9)
                     continue;
-
-                if (i >= 9)
-                    break;
 
                 //check sequences
                 if (tiles[i].total >= 1)
