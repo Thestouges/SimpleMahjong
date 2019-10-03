@@ -9,7 +9,7 @@ namespace SimpleMahjong
     {
         List<Tile> MahjongSet;
 
-        MahjongTiles()
+        public MahjongTiles()
         {
             InitializeSet();
         }
@@ -20,7 +20,7 @@ namespace SimpleMahjong
             ShuffleSet();
         }
 
-        private void AddTiles()
+        public void AddTiles()
         {
             for (int i = 0; i < 38; i++)
             {
@@ -36,14 +36,14 @@ namespace SimpleMahjong
             }
         }
 
-        private void ShuffleSet()
+        public void ShuffleSet()
         {
             Random rnd = new Random();
             var result = MahjongSet.OrderBy(item => rnd.Next());
             MahjongSet = result.ToList();
         }
 
-        private Tile DrawTile()
+        public Tile DrawTile()
         {
             Tile Draw = MahjongSet[MahjongSet.Count-1];
             MahjongSet.RemoveAt(MahjongSet.Count - 1);
@@ -51,7 +51,7 @@ namespace SimpleMahjong
             return Draw;
         }
 
-        private int GetTilesCount()
+        public int GetTilesCount()
         {
             return MahjongSet.Count;
         }

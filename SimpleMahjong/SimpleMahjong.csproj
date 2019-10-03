@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MahjongFunctions.cs" />
+    <Compile Include="MahjongGame.cs" />
     <Compile Include="MahjongTiles.cs" />
     <Compile Include="MainPage.aspx.cs">
       <DependentUpon>MainPage.aspx</DependentUpon>
