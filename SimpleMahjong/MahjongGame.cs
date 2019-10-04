@@ -67,6 +67,13 @@ namespace SimpleMahjong
                 }
                 index++;
             }
+
+            Players[player].Hand = Players[player].Hand.OrderBy(x => x.Number).ToList();
+        }
+
+        public void CheckWinningHand()
+        {
+
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Web.Script.Serialization;
-
+using System.Text;
 
 namespace SimpleMahjong
 {
@@ -22,7 +22,7 @@ namespace SimpleMahjong
             hand = new List<Tile>();
             if (Page.IsPostBack)
             {
-
+                ShowHand();
             }
             else
             {
@@ -44,12 +44,37 @@ namespace SimpleMahjong
             }
 
             SortHand();
-            string html = "";
+            //string html = "";
             foreach (Tile item in hand)
             {
-                html += "<input type=Image class=myhand src=" + item.GetImagePath() + ">";
+                //html += "<input type=Image class=myhand src=" + item.GetImagePath() + ">";
+                ImageButton ihand = new ImageButton();
+                ihand.ToolTip = item.Number.ToString();
+                ihand.ImageUrl = item.GetImagePath();
+                ihand.CssClass = "myhand";
+                ihand.Click += new ImageClickEventHandler((sender, e) => RemoveFromHand(sender, e, item));
+                handID.Controls.Add(ihand);
             }
-            handID.InnerHtml = html;
+            //handID.InnerHtml = html;
+        }
+
+        private void RemoveFromHand(object sender, EventArgs e, Tile tile)
+        {
+            //Console.WriteLine(tile.Number);
+            hand = (List<Tile>)Session["hand"];
+
+            int index = 0;
+            foreach(Tile item in hand)
+            {
+                if(item == tile)
+                {
+                    hand.RemoveAt(index);
+                    break;
+                }
+                index++;
+            }
+
+            AddPostBack();
         }
 
         private void SortHand()
@@ -68,15 +93,16 @@ namespace SimpleMahjong
             }
 
             int insertCounter = 0;
-            foreach(Tile item in hand)
+            foreach (Tile item in hand)
             {
-                if(item.Number == num)
+                if (item.Number == num)
                 {
                     insertCounter++;
                 }
 
-                if(insertCounter >= 4)
+                if (insertCounter >= 4)
                 {
+                    //ShowHand();
                     return;
                 }
             }
@@ -89,13 +115,30 @@ namespace SimpleMahjong
                 Session["hand"] = hand;
             }
 
-            ShowHand();
+            //ShowHand();
             handsize.Value = hand.Count().ToString();
 
             if (hand.Count() == 14)
             {
                 ShowShantenNumber();
             }
+
+            AddPostBack();
+        }
+
+        private void AddPostBack()
+        {
+            StringBuilder sbScript = new StringBuilder();
+
+            sbScript.Append("<script language='JavaScript' type='text/javascript'>\n");
+            sbScript.Append("<!--\n");
+            //sbScript.Append(this.GetPostBackEventReference(this, "PBArg") + ";\n");
+            sbScript.Append(this.ClientScript.GetPostBackEventReference(this, "PBArg") + ";\n");
+            sbScript.Append("// -->\n");
+            sbScript.Append("</script>\n");
+
+            //this.RegisterStartupScript("AutoPostBackScript", sbScript.ToString());
+            this.ClientScript.RegisterStartupScript(this.GetType(),"AutoPostBackScript", sbScript.ToString());
         }
 
         private void ShowShantenNumber()
