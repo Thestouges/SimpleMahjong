@@ -12,6 +12,7 @@ namespace SimpleMahjong
             public List<Tile> Hand;
             public List<Tile> Discard;
             public Tile drawn;
+            public List<Tile> WinningTiles;
         }
 
         class DoraIndicators
@@ -24,6 +25,7 @@ namespace SimpleMahjong
         int playerCount = 4;
         DoraIndicators doraIndicators;
         MahjongFunctions MahjongFunctions;
+        int currTurn = 0;
 
         MahjongGame()
         {
@@ -69,11 +71,15 @@ namespace SimpleMahjong
             }
 
             Players[player].Hand = Players[player].Hand.OrderBy(x => x.Number).ToList();
+            Players[player].WinningTiles = MahjongFunctions.GetWinningTiles(Players[player].Hand);
         }
 
-        public void CheckWinningHand()
+        public void CheckWinningHand(int player, List<Tile> han, List<Tile> dis)
         {
-
+            if(currTurn != player)
+            {
+                
+            }
         }
     }
 }

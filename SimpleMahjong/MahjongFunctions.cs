@@ -7,7 +7,13 @@ namespace SimpleMahjong
 {
     public class MahjongFunctions
     {
+        int ListNumber;
         int ShantenNum = 8;
+
+        public MahjongFunctions()
+        {
+            ListNumber = 39;
+        }
         public class opentile
         {
             public int total = 0;
@@ -20,7 +26,6 @@ namespace SimpleMahjong
         }
         public int Shanten(List<Tile> hand)
         {
-            int ListNumber = 39;
             ShantenNum = 8;
 
             List<opentile> tiles = new List<opentile>();
@@ -141,9 +146,18 @@ namespace SimpleMahjong
             }
         }
 
-        public bool InFuriten(List<Tile> hand, List<Tile> discard)
+        public bool InFuriten(List<Tile> hand, List<Tile> discard, Tile tile)
         {
             bool result = false;
+
+            foreach(Tile han in hand)
+            {
+                foreach(Tile dis in discard)
+                {
+                    if (han == dis)
+                        return true;
+                }
+            }
 
             return result;
         }
@@ -151,21 +165,37 @@ namespace SimpleMahjong
         public List<Tile> GetWinningTiles(List<Tile> hand)
         {
             List<Tile> result = new List<Tile>();
-            Dictionary<Tile, int> tileList = new Dictionary<Tile, int>();
 
-            foreach(Tile item in hand)
+            for(int i = 0; i < ListNumber; i++)
             {
-                if(tileList.ContainsKey(item))
+                if (i % 10 == 0)
                 {
-                    tileList[item]++;
+                    continue;
                 }
-                else
+                List<Tile> temptiles = hand.Select(x => x.Copy()).ToList();
+
+                Tile tile = new Tile();
+                tile.Number = i;
+                tile.Closed = false;
+                temptiles.Add(tile);
+
+                if(Shanten(temptiles) == 0)
                 {
-                    tileList.Add(item, 1);
+                    result.Add(tile);
                 }
             }
+            
+            return result;
+        }
 
+        public bool IsWinningHand(List<Tile> hand)
+        {
+            bool result = true;
 
+            if(Shanten(hand) != 0)
+            {
+                result = false;
+            }
 
             return result;
         }

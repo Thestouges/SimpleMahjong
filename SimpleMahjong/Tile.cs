@@ -61,6 +61,11 @@ namespace SimpleMahjong
         public int Number;
         public bool Closed = true;
 
+        public Tile Copy()
+        {
+            return new Tile { Number = this.Number, Closed = this.Closed };
+        }
+
         public string GetImagePath()
         {
             string path = "";
