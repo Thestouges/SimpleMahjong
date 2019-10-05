@@ -56,7 +56,7 @@ namespace SimpleMahjong
             Players[player].Hand.Add(drawntile);
         }
 
-        public void DiscardTile(int player, Tile tile)
+        public List<int> DiscardTile(int player, Tile tile)
         {
             int index = 0;
             foreach(Tile item in Players[player].Hand)
@@ -72,6 +72,22 @@ namespace SimpleMahjong
 
             Players[player].Hand = Players[player].Hand.OrderBy(x => x.Number).ToList();
             Players[player].WinningTiles = MahjongFunctions.GetWinningTiles(Players[player].Hand);
+
+            List<int> WinningPlayers = new List<int>();
+            for(int i = 0; i < Players.Count-1; i++)
+            {
+                if(i == player)
+                {
+                    continue;
+                }
+
+                if (Players[i].WinningTiles.Contains(tile))
+                {
+                    WinningPlayers.Add(i);
+                }
+            }
+
+            return WinningPlayers;
         }
 
         public void CheckWinningHand(int player, List<Tile> han, List<Tile> dis)
