@@ -146,20 +146,18 @@ namespace SimpleMahjong
             }
         }
 
-        public bool InFuriten(List<Tile> hand, List<Tile> discard, Tile tile)
+        public bool InFuriten(List<Tile> discard, List<Tile> winningTiles)
         {
-            bool result = false;
-
-            foreach(Tile han in hand)
+            foreach(Tile dis in discard)
             {
-                foreach(Tile dis in discard)
+                foreach(Tile wt in winningTiles)
                 {
-                    if (han == dis)
+                    if (dis == wt)
                         return true;
                 }
             }
 
-            return result;
+            return false;
         }
 
         public List<Tile> GetWinningTiles(List<Tile> hand)
@@ -185,18 +183,6 @@ namespace SimpleMahjong
                 }
             }
             
-            return result;
-        }
-
-        public bool IsWinningHand(List<Tile> hand)
-        {
-            bool result = true;
-
-            if(Shanten(hand) != 0)
-            {
-                result = false;
-            }
-
             return result;
         }
     }

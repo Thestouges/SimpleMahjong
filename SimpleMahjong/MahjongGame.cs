@@ -89,13 +89,5 @@ namespace SimpleMahjong
 
             return WinningPlayers;
         }
-
-        public void CheckWinningHand(int player, List<Tile> han, List<Tile> dis)
-        {
-            if(currTurn != player)
-            {
-                
-            }
-        }
     }
 }
