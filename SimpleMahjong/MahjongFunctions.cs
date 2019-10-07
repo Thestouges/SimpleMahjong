@@ -72,6 +72,9 @@ namespace SimpleMahjong
                 }
             }
 
+            SevenPairsShanten(tiles.Select(x => x.Copy()).ToList());
+            ThirteenOrphansShanten(tiles.Select(x => x.Copy()).ToList());
+
             return ShantenNum;
         }
 
@@ -143,6 +146,51 @@ namespace SimpleMahjong
             if (ShantenNum > tempShanten)
             {
                 ShantenNum = tempShanten;
+            }
+        }
+
+        private void SevenPairsShanten(List<opentile> tiles)
+        {
+            int sp_shanten = 7;
+
+            foreach(opentile item in tiles)
+            {
+                if(item.total >= 2 && item.closed >= 2)
+                {
+                    sp_shanten--;
+                }
+            }
+
+            if(ShantenNum > sp_shanten)
+            {
+                ShantenNum = sp_shanten;
+            }
+        }
+
+        private void ThirteenOrphansShanten(List<opentile> tiles)
+        {
+            int to_shanten = 14;
+            bool pair = false;
+
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                if(i > 30 || i % 10 == 1 || i % 10 == 9)
+                {
+                    if(tiles[i].total == 2 && pair == false)
+                    {
+                        to_shanten -= 2;
+                        pair = true;
+                    }
+                    else if(tiles[i].total >= 1)
+                    {
+                        to_shanten--;
+                    }
+                }
+            }
+
+            if(ShantenNum > to_shanten)
+            {
+                ShantenNum = to_shanten;
             }
         }
 
