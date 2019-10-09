@@ -35,8 +35,8 @@ namespace SimpleMahjong
                 tiles.Add(opentile);
             }
 
-            
-            for(int i = 0; i < hand.Count; i++)
+
+            for (int i = 0; i < hand.Count; i++)
             {
                 tiles[hand[i].Number].total++;
                 if (hand[i].Closed)
@@ -44,19 +44,19 @@ namespace SimpleMahjong
                     tiles[hand[i].Number].closed++;
                 }
             }
-            
+
             int index = 0;
-            foreach(opentile item in tiles)
+            foreach (opentile item in tiles)
             {
                 int tempShantenNum = 8;
-                if (item.total >= 2 && item.closed >=2)
+                if (item.total >= 2 && item.closed >= 2)
                 {
                     List<opentile> temptiles = tiles.Select(x => x.Copy()).ToList();
                     temptiles[index].total -= 2;
                     //temptiles[index].closed -= 2;
                     ShantenNumber(temptiles, ref tempShantenNum, 1);
                 }
-                if(item.total == 1 && item.closed >= 1)
+                if (item.total == 1 && item.closed >= 1)
                 {
                     List<opentile> temptiles = tiles.Select(x => x.Copy()).ToList();
                     temptiles[index].total -= 1;
@@ -83,7 +83,7 @@ namespace SimpleMahjong
             int baseShanten = shantenNum;
             int tempShanten = shantenNum;
 
-            for (int i = counter; i < tiles.Count-1; i++)
+            for (int i = counter; i < tiles.Count - 1; i++)
             {
                 //check pons and pairs
                 if (tiles[i].total >= 3)
@@ -112,12 +112,12 @@ namespace SimpleMahjong
                 //check sequences
                 if (tiles[i].total >= 1)
                 {
-                    if(tiles[i+1].total >= 1 && tiles[i+2].total >= 1)
+                    if (tiles[i + 1].total >= 1 && tiles[i + 2].total >= 1)
                     {
                         List<opentile> temptiles = tiles.Select(x => x.Copy()).ToList();
                         temptiles[i].total -= 1;
-                        temptiles[i+1].total -= 1;
-                        temptiles[i+2].total -= 1;
+                        temptiles[i + 1].total -= 1;
+                        temptiles[i + 2].total -= 1;
                         tempShanten -= 2;
                         ShantenNumber(temptiles, ref tempShanten, i);
                         tempShanten = baseShanten;
@@ -153,15 +153,15 @@ namespace SimpleMahjong
         {
             int sp_shanten = 7;
 
-            foreach(opentile item in tiles)
+            foreach (opentile item in tiles)
             {
-                if(item.total >= 2 && item.closed >= 2)
+                if (item.total >= 2 && item.closed >= 2)
                 {
                     sp_shanten--;
                 }
             }
 
-            if(ShantenNum > sp_shanten)
+            if (ShantenNum > sp_shanten)
             {
                 ShantenNum = sp_shanten;
             }
@@ -174,21 +174,21 @@ namespace SimpleMahjong
 
             for (int i = 0; i < tiles.Count; i++)
             {
-                if(i > 30 || i % 10 == 1 || i % 10 == 9)
+                if (i > 30 || i % 10 == 1 || i % 10 == 9)
                 {
-                    if(tiles[i].total == 2 && pair == false)
+                    if (tiles[i].total == 2 && pair == false)
                     {
                         to_shanten -= 2;
                         pair = true;
                     }
-                    else if(tiles[i].total >= 1)
+                    else if (tiles[i].total >= 1)
                     {
                         to_shanten--;
                     }
                 }
             }
 
-            if(ShantenNum > to_shanten)
+            if (ShantenNum > to_shanten)
             {
                 ShantenNum = to_shanten;
             }
@@ -196,9 +196,9 @@ namespace SimpleMahjong
 
         public bool InFuriten(List<Tile> discard, List<Tile> winningTiles)
         {
-            foreach(Tile dis in discard)
+            foreach (Tile dis in discard)
             {
-                foreach(Tile wt in winningTiles)
+                foreach (Tile wt in winningTiles)
                 {
                     if (dis == wt)
                         return true;
@@ -212,7 +212,7 @@ namespace SimpleMahjong
         {
             List<Tile> result = new List<Tile>();
 
-            for(int i = 0; i < ListNumber; i++)
+            for (int i = 0; i < ListNumber; i++)
             {
                 if (i % 10 == 0)
                 {
@@ -225,13 +225,67 @@ namespace SimpleMahjong
                 tile.Closed = false;
                 temptiles.Add(tile);
 
-                if(Shanten(temptiles) == 0)
+                if (Shanten(temptiles) == 0)
                 {
                     result.Add(tile);
                 }
             }
-            
+
             return result;
+        }
+
+        public bool CanRiichi(List<Tile> hand)
+        {
+            foreach (Tile tile in hand)
+            {
+                if (tile.Closed == false)
+                    return false;
+            }
+
+            if (Shanten(hand) > 1)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool CallPon(List<Tile> hand, Tile discard)
+        {
+            int counter = 0;
+            foreach(Tile tile in hand)
+            {
+                if(discard.Number == tile.Number)
+                {
+                    counter++;
+                }
+            }
+
+            if(counter >= 2)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CallKan(List<Tile> hand, Tile discard)
+        {
+            int counter = 0;
+            foreach (Tile tile in hand)
+            {
+                if (discard.Number == tile.Number)
+                {
+                    counter++;
+                }
+            }
+
+            if (counter >= 3)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -13,6 +13,7 @@ namespace SimpleMahjong
             public List<Tile> Discard;
             public Tile drawn;
             public List<Tile> WinningTiles;
+            bool riichi = false;
         }
 
         class DoraIndicators
