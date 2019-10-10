@@ -287,5 +287,76 @@ namespace SimpleMahjong
 
             return false;
         }
+
+        public List<List<Tile>> CallChi(List<Tile> hand, Tile discard)
+        {
+            List<List<Tile>> result = new List<List<Tile>>();
+
+            if (discard.Number >= 30)
+                return result;
+
+            List<opentile> tiles = new List<opentile>();
+            for (int i = 0; i < ListNumber; i++)
+            {
+                opentile opentile = new opentile();
+                tiles.Add(opentile);
+            }
+
+            for (int i = 0; i < hand.Count; i++)
+            {
+                tiles[hand[i].Number].total++;
+                if (hand[i].Closed)
+                {
+                    tiles[hand[i].Number].closed++;
+                }
+            }
+
+            if(tiles[discard.Number - 2].total > 0 && tiles[discard.Number - 2].closed > 0 &&
+                tiles[discard.Number - 1].total > 0 && tiles[discard.Number - 1].closed > 0)
+            {
+                List<Tile> tempset = new List<Tile>();
+                Tile temptile = new Tile();
+
+                temptile.Number = discard.Number - 2;
+                tempset.Add(temptile);
+
+                temptile.Number = discard.Number - 1;
+                tempset.Add(temptile);
+
+                result.Add(tempset);
+            }
+
+            if (tiles[discard.Number - 1].total > 0 && tiles[discard.Number - 1].closed > 0 &&
+                tiles[discard.Number + 1].total > 0 && tiles[discard.Number + 1].closed > 0)
+            {
+                List<Tile> tempset = new List<Tile>();
+                Tile temptile = new Tile();
+
+                temptile.Number = discard.Number - 1;
+                tempset.Add(temptile);
+
+                temptile.Number = discard.Number + 1;
+                tempset.Add(temptile);
+
+                result.Add(tempset);
+            }
+
+            if (tiles[discard.Number + 1].total > 0 && tiles[discard.Number + 1].closed > 0 &&
+                tiles[discard.Number + 2].total > 0 && tiles[discard.Number + 2].closed > 0)
+            {
+                List<Tile> tempset = new List<Tile>();
+                Tile temptile = new Tile();
+
+                temptile.Number = discard.Number + 1;
+                tempset.Add(temptile);
+
+                temptile.Number = discard.Number + 2;
+                tempset.Add(temptile);
+
+                result.Add(tempset);
+            }
+
+            return result;
+        }
     }
 }
