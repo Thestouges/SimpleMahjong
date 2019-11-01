@@ -57,6 +57,7 @@
             <asp:Button ID="btnClearHand" runat="server" Text="Clear Hand" OnClick="btnClearHand_Click" />
             <br />
             <asp:Label ID="Label1" runat="server" Text="Hand Size: "></asp:Label> <%=handsize.Value %>
+            <br />
             <asp:Label ID="Label2" runat="server" Text="Shanten Number: "></asp:Label> <%=ShanNum.Value %>
             <div id="handID" runat="server">
                 
